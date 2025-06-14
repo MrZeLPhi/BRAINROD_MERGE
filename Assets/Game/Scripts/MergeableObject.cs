@@ -34,7 +34,7 @@ public class MergeableObject : MonoBehaviour
         // Переконаємось, що початковий стан Rigidbody2D коректний
         _rb.isKinematic = _isPlayerControlled; // Якщо контролюється гравцем, вимкніть фізику
         _rb.gravityScale = _isPlayerControlled ? 0f : 1f; // Вимкніть гравітацію, якщо контролюється
-        _rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Заборонити обертання
+        //_rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Заборонити обертання
         _collider.enabled = !_isPlayerControlled; // Колайдер вимкнений, поки керується гравцем
 
         UpdateSprite();
