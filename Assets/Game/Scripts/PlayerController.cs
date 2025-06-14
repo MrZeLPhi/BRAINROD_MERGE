@@ -1,125 +1,115 @@
-using UnityEngine;
-using UnityEngine.UI;
+    using UnityEngine;
+    using UnityEngine.UI; // For working with Slider, though not directly used, only via TouchSlider
 
-public class PlayerController : MonoBehaviour
-{
-    [Header("UI References")]
-    [SerializeField] private Slider _moveSlider; // Слайдер для горизонтального руху
-    [SerializeField] private Button _releaseButton; // Кнопка "відпустити" (опціонально, якщо не за відпусканням слайдера)
-
-    [Header("Movement Settings")]
-    [SerializeField] private float _moveSpeed = 10f; // Швидкість руху об'єкта за слайдером
-    [SerializeField] private float _minX = -4f; // Ліва межа руху
-    [SerializeField] private float _maxX = 4f; // Права межа руху
-
-    // Посилання на менеджер спавну
-    [SerializeField] private SpawnManager _spawnManager;
-
-    private MergeableObject _currentActiveObject; // Об'єкт, яким керує гравець
-    private bool _isSliderPressed = false; // Чи натиснутий слайдер
-
-    private void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        if (_moveSlider == null) Debug.LogError("Слайдер не призначений в PlayerController!");
-        if (_spawnManager == null) Debug.LogError("SpawnManager не призначений в PlayerController!");
-
-        // Додаємо слухачі подій слайдера
-        _moveSlider.onValueChanged.AddListener(OnSliderValueChanged);
+        [Header("UI References")]
+        [SerializeField] private TouchSlider _touchSlider; // Reference to our TouchSlider
         
-        // Для відпускання слайдера, потрібно використовувати EventTrigger на UI Slider
-        // Або більш простий варіант, якщо Slider - це лише візуалізація, а керування йде від тача
-        // Для демонстрації, припустимо, що Input.GetMouseButtonUp(0) це відпускання
-        // Якщо це тач, то потрібно OnPointerUp у EventTrigger на Slider
-    }
+        // Reference to the spawn manager
+        [SerializeField] private SpawnManager _spawnManager;
 
-    private void Start()
-    {
-        // Запускаємо спавн першого об'єкта на початку гри
-        _spawnManager.SpawnNextPlayerObject(this);
-    }
+        private MergeableObject _currentActiveObject; // The object currently controlled by the player
 
-    private void OnDisable()
-    {
-        _moveSlider.onValueChanged.RemoveListener(OnSliderValueChanged);
-    }
-
-    /// <summary>
-    /// Встановлює поточний активний об'єкт, яким керує гравець.
-    /// Викликається SpawnManager'ом.
-    /// </summary>
-    public void SetCurrentActiveObject(MergeableObject obj)
-    {
-        _currentActiveObject = obj;
-        if (_currentActiveObject != null)
+        private void Awake()
         {
-            _currentActiveObject.transform.position = new Vector3(
-                Mathf.Lerp(_minX, _maxX, _moveSlider.value), // Початкова позиція за слайдером
-                _currentActiveObject.transform.position.y,
-                _currentActiveObject.transform.position.z
-            );
+            if (_touchSlider == null) Debug.LogError("TouchSlider is not assigned in PlayerController!");
+            if (_spawnManager == null) Debug.LogError("SpawnManager is not assigned in PlayerController!");
+
+            // Subscribe to events from TouchSlider
+            _touchSlider.OnPointerDragEvent += OnSliderDrag;
+            _touchSlider.OnPointerUpEvent += OnSliderRelease;
+            _touchSlider.OnPointerDownEvent += OnSliderPress; // Optional, if something needs to be done on press
         }
-    }
 
-    private void Update()
-    {
-        // Відстежуємо натискання/відпускання миші/дотику для мобільних
-        if (Input.GetMouseButtonDown(0)) // Або Input.GetTouch(0).phase == TouchPhase.Began
+        private void Start()
         {
-            _isSliderPressed = true;
+            // Start spawning the first object at the beginning of the game
+            _spawnManager.SpawnNextPlayerObject(this);
         }
-        else if (Input.GetMouseButtonUp(0)) // Або Input.GetTouch(0).phase == TouchPhase.Ended
+
+        private void OnDisable()
         {
-            // Перевіряємо, чи відпустили слайдер
-            // Це дуже спрощено, в реальній грі потрібно перевіряти, чи палець був НАД слайдером
-            if (_isSliderPressed && _currentActiveObject != null && _currentActiveObject.IsPlayerControlled)
+            // It's important to unsubscribe from events to avoid memory leaks
+            _touchSlider.OnPointerDragEvent -= OnSliderDrag;
+            _touchSlider.OnPointerUpEvent -= OnSliderRelease;
+            _touchSlider.OnPointerDownEvent -= OnSliderPress;
+        }
+
+        /// <summary>
+        /// Sets the current active object controlled by the player.
+        /// Called by SpawnManager.
+        /// </summary>
+        public void SetCurrentActiveObject(MergeableObject obj)
+        {
+            _currentActiveObject = obj;
+            if (_currentActiveObject != null)
+            {
+                // Set the initial position of the object according to the current slider position (0 - center)
+                float initialX = _touchSlider.GetComponent<Slider>().value; // Get the current slider value (which should be 0)
+                _currentActiveObject.transform.position = new Vector3(
+                    initialX,
+                    _currentActiveObject.transform.position.y,
+                    _currentActiveObject.transform.position.z
+                );
+            }
+        }
+
+        /// <summary>
+        /// Handles the slider press event.
+        /// </summary>
+        private void OnSliderPress()
+        {
+            // You can add logic here for when the player just presses the slider
+            // For example, a visual highlight or a sound
+            // Debug.Log("Slider pressed!");
+        }
+
+        /// <summary>
+        /// Handles the slider drag event.
+        /// The object precisely follows the slider's X-position, using its value as a coordinate.
+        /// </summary>
+        /// <param name="sliderValue">The slider value (from -1 to 1).</param>
+        private void OnSliderDrag(float sliderValue)
+        {
+            if (_currentActiveObject != null && _currentActiveObject.IsPlayerControlled)
+            {
+                // Set the object's position directly, without delay
+                // Use the slider value as the X-coordinate in the game world
+                _currentActiveObject.transform.position = new Vector3(
+                    sliderValue, // sliderValue is already in the range of -1 to 1
+                    _currentActiveObject.transform.position.y,
+                    _currentActiveObject.transform.position.z
+                );
+            }
+        }
+
+        /// <summary>
+        /// Handles the slider release event.
+        /// Releases the current object and requests a new one.
+        /// </summary>
+        private void OnSliderRelease()
+        {
+            if (_currentActiveObject == null) return;
+
+            // Check if the object was actually controlled by the player until now
+            if (_currentActiveObject.IsPlayerControlled)
             {
                 ReleaseCurrentObject();
             }
-            _isSliderPressed = false;
         }
 
-        // Рух об'єкта за слайдером
-        if (_currentActiveObject != null && _currentActiveObject.IsPlayerControlled)
+        /// <summary>
+        /// Releases the current object, activates its physics, and requests a new object.
+        /// </summary>
+        private void ReleaseCurrentObject()
         {
-            MoveObjectWithSlider();
+            if (_currentActiveObject == null) return;
+
+            _currentActiveObject.ActivatePhysics(); // Activate the object's physics
+            _currentActiveObject = null; // Clear the reference to the current object
+
+            // Request a new object for the player from SpawnManager
+            _spawnManager.SpawnNextPlayerObject(this);
         }
     }
-
-    /// <summary>
-    /// Обробляє зміну значення слайдера.
-    /// </summary>
-    private void OnSliderValueChanged(float value)
-    {
-        // Якщо об'єкт під контролем гравця, то Update його перемістить.
-        // Цей метод потрібен, щоб зареєструвати зміну значення.
-    }
-
-    /// <summary>
-    /// Переміщує поточний активний об'єкт відповідно до значення слайдера.
-    /// </summary>
-    private void MoveObjectWithSlider()
-    {
-        if (_currentActiveObject == null) return;
-
-        // Перетворюємо значення слайдера (0-1) на діапазон X-координат
-        float targetX = Mathf.Lerp(_minX, _maxX, _moveSlider.value);
-        
-        // Плавно переміщуємо об'єкт до цільової позиції
-        Vector3 targetPosition = new Vector3(targetX, _currentActiveObject.transform.position.y, _currentActiveObject.transform.position.z);
-        _currentActiveObject.transform.position = Vector3.MoveTowards(_currentActiveObject.transform.position, targetPosition, _moveSpeed * Time.deltaTime);
-    }
-
-    /// <summary>
-    /// Відпускає поточний об'єкт, активує його фізику і запитує новий об'єкт.
-    /// </summary>
-    private void ReleaseCurrentObject()
-    {
-        if (_currentActiveObject == null) return;
-
-        _currentActiveObject.ActivatePhysics(); // Активуємо фізику об'єкта
-        _currentActiveObject = null; // Обнуляємо посилання на поточний об'єкт
-
-        // Запитуємо у SpawnManager новий об'єкт для гравця
-        _spawnManager.SpawnNextPlayerObject(this);
-    }
-}
