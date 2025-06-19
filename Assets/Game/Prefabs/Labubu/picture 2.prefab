@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6133239381329424039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 0.08, y: 0.08, z: 0.88888884}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -224,8 +224,10 @@ MonoBehaviour:
   _objectSprite: {fileID: -6470460504253458178, guid: 4d8134730c43ad9428d211bce6502eaf, type: 3}
   _pointsOnMerge: 0
   _isPlayerControlled: 1
-  _isBeingMerged: 0
+  _isBeingMerged: 1
   _hasPhysics: 0
+  _fallGravityScale: 0.7
+  _fallLinearDrag: 0.5
 --- !u!114 &1576641432859018846
 MonoBehaviour:
   m_ObjectHideFlags: 0

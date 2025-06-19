@@ -183,6 +183,8 @@ MonoBehaviour:
   _isPlayerControlled: 1
   _isBeingMerged: 1
   _hasPhysics: 0
+  _fallGravityScale: 0.7
+  _fallLinearDrag: 0.5
 --- !u!114 &8156994314718838565
 MonoBehaviour:
   m_ObjectHideFlags: 0

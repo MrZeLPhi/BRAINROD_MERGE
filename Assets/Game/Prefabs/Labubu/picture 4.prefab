@@ -242,8 +242,10 @@ MonoBehaviour:
   _objectSprite: {fileID: 4130640169021434097, guid: 1cf179c4288f37d4987f3a5233fa46f5, type: 3}
   _pointsOnMerge: 0
   _isPlayerControlled: 1
-  _isBeingMerged: 0
+  _isBeingMerged: 1
   _hasPhysics: 0
+  _fallGravityScale: 0.7
+  _fallLinearDrag: 0.5
 --- !u!114 &6868908654344655156
 MonoBehaviour:
   m_ObjectHideFlags: 0
