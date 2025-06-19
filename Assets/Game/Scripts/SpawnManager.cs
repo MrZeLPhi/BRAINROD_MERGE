@@ -11,14 +11,16 @@ public class SpawnManager : MonoBehaviour
         [Range(0, 100)] // Rarity as a percentage or weight
         public int spawnWeight; // Higher weight means higher chance to spawn
         [Range(0, 1000)] // Points awarded when this object is created (for merged objects)
-        public int pointsValue; // NEW: Points value for this specific prefab
+        public int pointsValue; // Points value for this specific prefab
     }
 
     [Header("Spawn Settings")]
-    [SerializeField] private Transform _spawnPoint; // Spawn point for the player's object
+    [SerializeField] private Transform _spawnPoint; // Spawn point for ALL new objects (player's & merged)
     [SerializeField] private List<SpawnableObject> _spawnableObjects; // List of objects that can be spawned for the player, with their weights
     [SerializeField] private float _spawnDelay = 0.5f; // Delay before spawning a new player object
     
+    // Removed: Play Area Bounds (for finding free spawn spot) - no longer needed
+
     // Reference to PlayerController to pass the new object
     private PlayerController _playerController;
 
@@ -129,29 +131,34 @@ public class SpawnManager : MonoBehaviour
         SelectRandomSpawnablePrefab(); // Updates _nextPrefabForUI to the *next* object
 
         // Spawn the object that was designated for *this* turn
+        // For player-controlled objects, we don't need to find a free spot, as PlayerController moves it.
+        // It will start at _spawnPoint.position.
         MergeableObject newObject = Instantiate(prefabToSpawnThisTurn, _spawnPoint.position, Quaternion.identity);
-        // When spawning the player's initial object, its points value isn't directly added to global score yet.
-        // It becomes relevant when it's part of a merge that creates a *new* object.
-        newObject.Initialize(prefabToSpawnThisTurn.MergeLevel, prefabToSpawnThisTurn.GetComponent<SpriteRenderer>().sprite, prefabToSpawnThisTurn.PointsOnMerge, true); // Pass prefab's points
+        newObject.Initialize(prefabToSpawnThisTurn.MergeLevel, prefabToSpawnThisTurn.GetComponent<SpriteRenderer>().sprite, prefabToSpawnThisTurn.PointsOnMerge, true);
         
         // Pass the new object to the player controller.
+        // PlayerController.SetCurrentActiveObject will then call UpdateNextObjectUI,
+        // which will now correctly get the *newly selected* _nextPrefabForUI.
         _playerController.SetCurrentActiveObject(newObject);
     }
 
     /// <summary>
     /// Spawns an object after two others have merged.
     /// </summary>
-    /// <param name="position">Position to spawn the new object.</param>
+    /// <param name="position">Position (X-coordinate from the merge) where the new object will spawn.</param>
     /// <param name="newLevel">Level of the new object (e.g., 8 if 4+4 merged).</param>
-    /// <param name="pointsValue">The points value for this newly created merged object.</param> // NEW parameter
-    public void SpawnMergedObject(Vector3 position, int newLevel, int pointsValue) // Updated method signature
+    /// <param name="pointsValue">The points value for this newly created merged object.</param>
+    public void SpawnMergedObject(Vector3 position, int newLevel, int pointsValue)
     {
         MergeableObject prefab = GetPrefabByLevel(newLevel);
         if (prefab != null)
         {
-            MergeableObject newObject = Instantiate(prefab, position, Quaternion.identity);
+            // Spawn the merged object directly at the merge point's position.
+            // This is the desired behavior for spawning at the collision point.
+            Vector3 spawnPosition = new Vector3(position.x, position.y, position.z); // Use position.y directly
+            MergeableObject newObject = Instantiate(prefab, spawnPosition, Quaternion.identity);
+            
             // Initialize the object as not player controlled, with physics activated
-            // Use the passed pointsValue here, which was calculated in MergeDetector
             newObject.Initialize(newLevel, prefab.GetComponent<SpriteRenderer>().sprite, pointsValue, false); 
         }
         else
@@ -177,4 +184,6 @@ public class SpawnManager : MonoBehaviour
         }
         return null;
     }
+
+    // Removed: FindFreeSpawnPosition method and related fields - no longer needed
 }

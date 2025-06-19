@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -6470460504253458178, guid: 4d8134730c43ad9428d211bce6502eaf, type: 3}
+  m_Sprite: {fileID: 988388304942147450, guid: 739ee626e3c231b488a8afa6966e86ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -129,7 +129,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.98, y: 10.48}
+    oldSize: {x: 6, y: 10.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -240,3 +240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d8e97ed9c6a884cbc14df89c376219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _explosionForce: 100
+  _explosionRadius: 0.18
+  _explosionLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  _mergeSmokeEffectPrefab: {fileID: 3388567169902759131, guid: d42134ad66073ce499187146b11b05c5, type: 3}

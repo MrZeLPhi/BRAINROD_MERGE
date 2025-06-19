@@ -7,6 +7,14 @@ public class MergeDetector : MonoBehaviour
     private MergeableObject _mergeableObject; // Reference to its own MergeableObject component
     private SpawnManager _spawnManager; // Reference to SpawnManager
 
+    [Header("Explosion Settings on Merge")]
+    [SerializeField] private float _explosionForce = 100f; // Сила "вибуху"
+    [SerializeField] private float _explosionRadius = 1.5f; // Радіус дії "вибуху"
+    [SerializeField] private LayerMask _explosionLayerMask; // Маска шарів для об'єктів, на які діє вибух
+
+    [Header("Merge Effects")]
+    [SerializeField] private ParticleSystem _mergeSmokeEffectPrefab; // NEW: ParticleSystem prefab for smoke effect on merge
+
     private void Awake()
     {
         _mergeableObject = GetComponent<MergeableObject>();
@@ -70,25 +78,31 @@ public class MergeDetector : MonoBehaviour
         // ==== Add visual and sound effects for merging here ====
         Debug.Log($"Objects of level {_mergeableObject.MergeLevel} are merging!");
 
-        yield return new WaitForSeconds(0.2f); // Small delay for visual effect
+        // NEW: Play merge smoke effect
+        if (_mergeSmokeEffectPrefab != null)
+        {
+            ParticleSystem smokeInstance = Instantiate(_mergeSmokeEffectPrefab, mergePoint, Quaternion.identity);
+            smokeInstance.Play();
+            Destroy(smokeInstance.gameObject, smokeInstance.main.duration); // Destroy effect after it finishes
+        }
+
+        // Apply explosion force to surrounding objects BEFORE spawning the new one
+        ApplyExplosionForce(mergePoint);
+
+        yield return new WaitForSeconds(0.2f); // Small delay for visual effect and explosion to take effect
 
         // Calculate the new level
         int newLevel = _mergeableObject.MergeLevel * 2;
         
-        // NEW: Calculate points for the new merged object
-        // For simplicity, let's say the new object's points are simply its merge level.
-        // You can make this more complex (e.g., sum of merged objects' points, or a lookup table).
+        // Calculate points for the new merged object
         int pointsForNewObject = newLevel; 
 
         // Inform SpawnManager to create a new object
-        // Pass the points to SpawnManager so it can initialize the new object with them
         _spawnManager.SpawnMergedObject(mergePoint, newLevel, pointsForNewObject); // Updated call
 
-        // NEW: Add points to the global score. We add the points of the *newly created* object.
-        // It's crucial that ScoreManager.Instance is available here.
+        // Add points to the global score.
         if (ScoreManager.Instance != null)
         {
-            // Add points based on the *newly formed* object's value
             ScoreManager.Instance.AddPoints(pointsForNewObject); 
         }
         else
@@ -96,9 +110,39 @@ public class MergeDetector : MonoBehaviour
             Debug.LogWarning("ScoreManager.Instance is not available. Cannot add points.");
         }
 
-
         // Destroy the original objects
         Destroy(otherObject.gameObject);
         Destroy(this.gameObject);
+    }
+
+    /// <summary>
+    /// Applies an explosion force to nearby Rigidbody2D objects.
+    /// </summary>
+    /// <param name="explosionOrigin">The center point of the explosion.</param>
+    private void ApplyExplosionForce(Vector2 explosionOrigin)
+    {
+        // Find all colliders within the explosion radius on specified layers
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionOrigin, _explosionRadius, _explosionLayerMask);
+
+        foreach (Collider2D hitCollider in colliders)
+        {
+            Rigidbody2D rb = hitCollider.GetComponent<Rigidbody2D>();
+            MergeableObject mergeObj = hitCollider.GetComponent<MergeableObject>();
+
+            // Ensure it's a Rigidbody2D that is not kinematic (i.e., physics-controlled)
+            // And ensure it's not one of the objects currently being merged
+            if (rb != null && !rb.isKinematic && mergeObj != null && !mergeObj.IsBeingMerged)
+            {
+                Vector2 direction = hitCollider.transform.position - (Vector3)explosionOrigin;
+                float distance = direction.magnitude;
+
+                // Calculate force falloff based on distance
+                float forceMultiplier = 1 - (distance / _explosionRadius);
+                if (forceMultiplier < 0) forceMultiplier = 0; // Ensure positive force
+
+                rb.AddForce(direction.normalized * _explosionForce * forceMultiplier, ForceMode2D.Impulse);
+                Debug.Log($"Applied explosion force to {hitCollider.gameObject.name}");
+            }
+        }
     }
 }

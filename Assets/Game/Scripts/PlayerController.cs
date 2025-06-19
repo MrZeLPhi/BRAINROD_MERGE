@@ -1,91 +1,91 @@
 using UnityEngine;
-using UnityEngine.UI; // Для роботи з Slider та Image
+using UnityEngine.UI; // For working with Slider and Image
 
 public class PlayerController : MonoBehaviour
 {
     [Header("UI References")]
-    [SerializeField] private TouchSlider _touchSlider; // Посилання на наш TouchSlider
-    [SerializeField] private Image _nextObjectUIImageView; // Нове: UI Image для відображення наступного об'єкта
+    [SerializeField] private TouchSlider _touchSlider; // Reference to our TouchSlider
+    [SerializeField] private Image _nextObjectUIImageView; // UI Image to display the next object
     
-    // Посилання на менеджер спавну
+    // Reference to the spawn manager
     [SerializeField] private SpawnManager _spawnManager;
 
-    private MergeableObject _currentActiveObject; // Об'єкт, яким керує гравець
+    private MergeableObject _currentActiveObject; // The object currently controlled by the player
 
     private void Awake()
     {
-        if (_touchSlider == null) Debug.LogError("TouchSlider не призначений в PlayerController!");
-        if (_spawnManager == null) Debug.LogError("SpawnManager не призначений в PlayerController!");
-        // Нове: Перевірка посилання на Image
-        if (_nextObjectUIImageView == null) Debug.LogWarning("Next Object UI Image View не призначений в PlayerController! Наступний об'єкт не буде відображатися.");
+        if (_touchSlider == null) Debug.LogError("TouchSlider is not assigned in PlayerController!");
+        if (_spawnManager == null) Debug.LogError("SpawnManager is not assigned in PlayerController!");
+        // Check for Image reference
+        if (_nextObjectUIImageView == null) Debug.LogWarning("Next Object UI Image View is not assigned in PlayerController! The next object won't be displayed.");
 
 
-        // Підписуємося на події з TouchSlider
+        // Subscribe to events from TouchSlider
         _touchSlider.OnPointerDragEvent += OnSliderDrag;
         _touchSlider.OnPointerUpEvent += OnSliderRelease;
-        _touchSlider.OnPointerDownEvent += OnSliderPress; // Опціонально, якщо потрібно щось робити при натисканні
+        _touchSlider.OnPointerDownEvent += OnSliderPress; // Optional, if something needs to be done on press
     }
 
     private void Start()
     {
-        // Запускаємо спавн першого об'єкта на початку гри
+        // Start spawning the first object at the beginning of the game
         _spawnManager.SpawnNextPlayerObject(this);
-        // Оновлюємо UI наступного об'єкта одразу після запуску гри
+        // Update the UI for the next object immediately after game start
         UpdateNextObjectUI();
     }
 
     private void OnDisable()
     {
-        // Важливо відписатися від подій, щоб уникнути витоків пам'яті
+        // It's important to unsubscribe from events to avoid memory leaks
         _touchSlider.OnPointerDragEvent -= OnSliderDrag;
         _touchSlider.OnPointerUpEvent -= OnSliderRelease;
         _touchSlider.OnPointerDownEvent -= OnSliderPress;
     }
 
     /// <summary>
-    /// Встановлює поточний активний об'єкт, яким керує гравець.
-    /// Викликається SpawnManager'ом.
+    /// Sets the current active object controlled by the player.
+    /// Called by SpawnManager.
     /// </summary>
     public void SetCurrentActiveObject(MergeableObject obj)
     {
         _currentActiveObject = obj;
         if (_currentActiveObject != null)
         {
-            // Встановлюємо початкову позицію об'єкта відповідно до поточної позиції слайдера (0 - центр)
-            float initialX = _touchSlider.GetComponent<Slider>().value; // Отримуємо поточне значення слайдера (яке має бути 0)
+            // Set the initial position of the object according to the current slider position (0 - center)
+            float initialX = _touchSlider.GetComponent<Slider>().value; // Get the current slider value (which should be 0)
             _currentActiveObject.transform.position = new Vector3(
                 initialX,
                 _currentActiveObject.transform.position.y,
                 _currentActiveObject.transform.position.z
             );
         }
-        // Нове: Оновлюємо UI наступного об'єкта щоразу, коли встановлюється новий поточний об'єкт
+        // Update the UI for the next object every time a new current object is set
         UpdateNextObjectUI();
     }
 
     /// <summary>
-    /// Обробляє подію натискання на слайдер.
+    /// Handles the slider press event.
     /// </summary>
     private void OnSliderPress()
     {
-        // Можна додати логіку, коли гравець тільки натиснув на слайдер
-        // Наприклад, візуальне підсвічування або звук
-        // Debug.Log("Слайдер натиснуто!");
+        // Add logic here for when the player first presses the slider
+        // E.g., a visual highlight or sound
+        // Debug.Log("Slider pressed!");
     }
 
     /// <summary>
-    /// Обробляє подію перетягування слайдера.
-    /// Об'єкт точно слідує за X-позицією слайдера, використовуючи його значення як координату.
+    /// Handles the slider drag event.
+    /// The object precisely follows the slider's X-position, using its value as a coordinate.
     /// </summary>
-    /// <param name="sliderValue">Значення слайдера (від -1 до 1).</param>
+    /// <param name="sliderValue">The slider value (from -1 to 1).</param>
     private void OnSliderDrag(float sliderValue)
     {
         if (_currentActiveObject != null && _currentActiveObject.IsPlayerControlled)
         {
-            // Встановлюємо позицію об'єкта безпосередньо, без затримки
-            // Використовуємо значення слайдера як X-координату в ігровому світі
+            // Set the object's position directly, without delay
+            // Use the slider value as the X-coordinate in the game world
             _currentActiveObject.transform.position = new Vector3(
-                sliderValue, // sliderValue вже в діапазоні -1 до 1
+                sliderValue, // sliderValue is already in the range of -1 to 1
                 _currentActiveObject.transform.position.y,
                 _currentActiveObject.transform.position.z
             );
@@ -93,36 +93,34 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Обробляє подію відпускання слайдера.
-    /// Відпускає поточний об'єкт і запитує новий.
+    /// Handles the slider release event.
+    /// Releases the current object and requests a new one.
     /// </summary>
     private void OnSliderRelease()
     {
         if (_currentActiveObject == null) return;
 
-        // Перевіряємо, чи об'єкт дійсно контролювався гравцем до цього
+        // Check if the object was actually controlled by the player until now
         if (_currentActiveObject.IsPlayerControlled)
-        {
             ReleaseCurrentObject();
-        }
     }
 
     /// <summary>
-    /// Відпускає поточний об'єкт, активує його фізику і запитує новий об'єкт.
+    /// Releases the current object, activates its physics, and requests a new object.
     /// </summary>
     private void ReleaseCurrentObject()
     {
         if (_currentActiveObject == null) return;
 
-        _currentActiveObject.ActivatePhysics(); // Активуємо фізику об'єкта
-        _currentActiveObject = null; // Обнуляємо посилання на поточний об'єкт
+        _currentActiveObject.ActivatePhysics(); // Activate the object's physics
+        _currentActiveObject = null; // Clear the reference to the current object
 
-        // Запитуємо у SpawnManager новий об'єкт для гравця
+        // Request a new object for the player from SpawnManager
         _spawnManager.SpawnNextPlayerObject(this);
     }
 
     /// <summary>
-    /// Оновлює UI Image, відображаючи спрайт наступного об'єкта, який буде спавнений.
+    /// Updates the UI Image, displaying the sprite of the next object to be spawned.
     /// </summary>
     private void UpdateNextObjectUI()
     {
@@ -136,7 +134,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                _nextObjectUIImageView.gameObject.SetActive(false); // Ховаємо, якщо немає наступного спрайту
+                _nextObjectUIImageView.gameObject.SetActive(false); // Hide if no next sprite
             }
         }
     }

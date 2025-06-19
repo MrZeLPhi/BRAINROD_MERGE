@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Over Settings")]
     [SerializeField] private GameObject _gameOverUIPanel; // Reference to your Game Over UI Panel/Image
-    [SerializeField] private TextMeshProUGUI _sessionHighScoreText; // NEW: UI Text for session high score
-    [SerializeField] private TextMeshProUGUI _allTimeHighScoreText; // NEW: UI Text for all-time high score
+    [SerializeField] private TextMeshProUGUI _sessionHighScoreText; // UI Text for session high score
+    [SerializeField] private TextMeshProUGUI _allTimeHighScoreText; // UI Text for all-time high score
     
     private bool _isGameOver = false; // Flag to prevent multiple game over calls
 
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         if (_spawnManager == null) Debug.LogError("SpawnManager is not assigned in GameManager!");
         if (_scoreManager == null) Debug.LogError("ScoreManager is not assigned in GameManager!"); 
         
-        // NEW: Check for UI text references for Game Over panel
+        // Check for UI text references for Game Over panel
         if (_sessionHighScoreText == null) Debug.LogWarning("Session High Score Text (TextMeshProUGUI) is not assigned in GameManager!");
         if (_allTimeHighScoreText == null) Debug.LogWarning("All-Time High Score Text (TextMeshProUGUI) is not assigned in GameManager!");
 
@@ -122,10 +122,10 @@ public class GameManager : MonoBehaviour
         {
             _gameOverUIPanel.SetActive(true); // Show the Game Over UI
 
-            // NEW: Update high score display on the Game Over Panel
+            // Update high score display on the Game Over Panel
             if (_sessionHighScoreText != null && ScoreManager.Instance != null)
             {
-                _sessionHighScoreText.text = $"Session: {ScoreManager.Instance.SessionHighScore}";
+                _sessionHighScoreText.text = $"Score: {ScoreManager.Instance.SessionHighScore}";
             }
             if (_allTimeHighScoreText != null && ScoreManager.Instance != null)
             {

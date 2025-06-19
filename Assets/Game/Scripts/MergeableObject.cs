@@ -126,7 +126,7 @@ public class MergeableObject : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the collider has the "GameOverTrigger" tag
-        if (other.CompareTag("GameOverTrigger")) // NEW: Checking by Tag
+        if (other.CompareTag("GameOverTrigger"))
         {
             if (_isInGameOverTriggerCurrently) return; // Already inside the zone
 
@@ -161,7 +161,7 @@ public class MergeableObject : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         // Check if the collider has the "GameOverTrigger" tag
-        if (other.CompareTag("GameOverTrigger")) // NEW: Checking by Tag
+        if (other.CompareTag("GameOverTrigger"))
         {
             _isInGameOverTriggerCurrently = false; // Mark as no longer inside the zone
             Debug.Log($"Object {gameObject.name} exited GameOverTrigger.");

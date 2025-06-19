@@ -238,3 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d8e97ed9c6a884cbc14df89c376219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _explosionForce: 100
+  _explosionRadius: 0.18
+  _explosionLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  _mergeSmokeEffectPrefab: {fileID: 3388567169902759131, guid: d42134ad66073ce499187146b11b05c5, type: 3}

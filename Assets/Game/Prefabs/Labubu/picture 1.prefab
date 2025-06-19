@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.8333334}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.83333343}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 6937817954938267909, guid: 3c83881973e909a4084b579b1bc7fb4f, type: 3}
+  m_Sprite: {fileID: 1022822829255870515, guid: f63df7ac006df9e4aa93d71dc92a0fb9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -129,7 +129,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.19, y: 9.43}
+    oldSize: {x: 8.19, y: 9.45}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -230,3 +230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d8e97ed9c6a884cbc14df89c376219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _explosionForce: 100
+  _explosionRadius: 0.18
+  _explosionLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  _mergeSmokeEffectPrefab: {fileID: 3388567169902759131, guid: d42134ad66073ce499187146b11b05c5, type: 3}
