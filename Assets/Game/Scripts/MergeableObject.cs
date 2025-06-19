@@ -1,25 +1,27 @@
 using UnityEngine;
-using UnityEngine.Rendering; // Для SortingGroup, якщо використовуєте
+using UnityEngine.Rendering; // For SortingGroup, if used
 
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Collider2D))] // Додамо Collider2D
-[RequireComponent(typeof(Rigidbody2D))] // Додамо Rigidbody2D
+[RequireComponent(typeof(Collider2D))] // Add Collider2D
+[RequireComponent(typeof(Rigidbody2D))] // Add Rigidbody2D
 public class MergeableObject : MonoBehaviour
 {
-    // [SerializeField] робить приватну змінну видимою в Inspector
-    [SerializeField] private int _mergeLevel; // Значення 2, 4, 8, ...
-    [SerializeField] private Sprite _objectSprite; // Спрайт для цього рівня
-    [SerializeField] private bool _isPlayerControlled = true; // Чи слідує за слайдером
-    [SerializeField] private bool _isBeingMerged = false; // Чи знаходиться в процесі злиття
-    [SerializeField] private bool _hasPhysics = false; // Чи активована фізика (після відпускання)
+    // [SerializeField] makes a private variable visible in the Inspector
+    [SerializeField] private int _mergeLevel; // Value 2, 4, 8, ...
+    [SerializeField] private Sprite _objectSprite; // Sprite for this level
+    [SerializeField] private int _pointsOnMerge = 0; // NEW: Points awarded when this object is CREATED by a merge
+    [SerializeField] private bool _isPlayerControlled = true; // Whether it follows the slider
+    [SerializeField] private bool _isBeingMerged = false; // Whether it's in the process of merging
+    [SerializeField] private bool _hasPhysics = false; // Whether physics is active (after release)
 
-    // Приватні посилання на компоненти, які отримуємо на старті
+    // Private references to components obtained at start
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private Collider2D _collider;
 
-    // Публічні властивості (читабельні, але не модифіковані ззовні без потреби)
+    // Public properties (readable, but not modifiable from outside without need)
     public int MergeLevel => _mergeLevel;
+    public int PointsOnMerge => _pointsOnMerge; // NEW: Public accessor for points
     public bool IsPlayerControlled => _isPlayerControlled;
     public bool IsBeingMerged => _isBeingMerged;
     public bool HasPhysics => _hasPhysics;
@@ -31,42 +33,44 @@ public class MergeableObject : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
 
-        // Переконаємось, що початковий стан Rigidbody2D коректний
-        _rb.isKinematic = _isPlayerControlled; // Якщо контролюється гравцем, вимкніть фізику
-        _rb.gravityScale = _isPlayerControlled ? 0f : 1f; // Вимкніть гравітацію, якщо контролюється
-        //_rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Заборонити обертання
-        _collider.enabled = !_isPlayerControlled; // Колайдер вимкнений, поки керується гравцем
+        // Ensure initial Rigidbody2D state is correct
+        _rb.isKinematic = _isPlayerControlled; // If player-controlled, disable physics
+        _rb.gravityScale = _isPlayerControlled ? 0f : 1f; // Disable gravity if controlled
+        //_rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Freeze rotation
+        _collider.enabled = !_isPlayerControlled; // Collider disabled while player-controlled
 
         UpdateSprite();
     }
 
     /// <summary>
-    /// Ініціалізує об'єкт після спавну.
+    /// Initializes the object after spawning.
     /// </summary>
-    /// <param name="level">Рівень об'єднання (2, 4, 8, ...)</param>
-    /// <param name="sprite">Спрайт для цього рівня</param>
-    /// <param name="isPlayerControlled">Чи буде керуватися гравцем (true для нового об'єкта зверху)</param>
-    public void Initialize(int level, Sprite sprite, bool isPlayerControlled)
+    /// <param name="level">Merge level (2, 4, 8, ...)</param>
+    /// <param name="sprite">Sprite for this level</param>
+    /// <param name="points">Points value for this object (awarded when it's created by merge)</param>
+    /// <param name="isPlayerControlled">Whether it will be player-controlled (true for new object at top)</param>
+    public void Initialize(int level, Sprite sprite, int points, bool isPlayerControlled) // Updated Initialize method
     {
         _mergeLevel = level;
         _objectSprite = sprite;
+        _pointsOnMerge = points; // Set the points
         _isPlayerControlled = isPlayerControlled;
         _isBeingMerged = false;
-        _hasPhysics = !isPlayerControlled; // Якщо не контролюється, значить, фізика вже активна
+        _hasPhysics = !isPlayerControlled; // If not player-controlled, physics is active
 
         UpdateSprite();
 
-        // Налаштування Rigidbody2D та Collider2D залежно від того, чи керується гравцем
+        // Rigidbody2D and Collider2D settings depending on whether it's player-controlled
         if (_rb == null) _rb = GetComponent<Rigidbody2D>();
         if (_collider == null) _collider = GetComponent<Collider2D>();
 
         _rb.isKinematic = isPlayerControlled;
         _rb.gravityScale = isPlayerControlled ? 0f : 1f;
-        _collider.enabled = !isPlayerControlled; // Колайдер вмикаємо лише коли об'єкт падає або лежить на дошці
+        _collider.enabled = !isPlayerControlled; // Enable collider only when object is falling or on board
     }
 
     /// <summary>
-    /// Оновлює спрайт об'єкта відповідно до _objectSprite.
+    /// Updates the object's sprite according to _objectSprite.
     /// </summary>
     private void UpdateSprite()
     {
@@ -78,24 +82,24 @@ public class MergeableObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Активує фізику об'єкта, коли гравець його "відпускає".
+    /// Activates the object's physics when the player "releases" it.
     /// </summary>
     public void ActivatePhysics()
     {
         _isPlayerControlled = false;
-        _rb.isKinematic = false; // Увімкнути фізику
-        _rb.gravityScale = 1f; // Увімкнути гравітацію
-        _collider.enabled = true; // Увімкнути колайдер
+        _rb.isKinematic = false; // Enable physics
+        _rb.gravityScale = 1f; // Enable gravity
+        _collider.enabled = true; // Enable collider
         _hasPhysics = true;
     }
 
     /// <summary>
-    /// Позначає об'єкт як такий, що зливається, щоб уникнути подвійних злиттів.
+    /// Marks the object as being merged to prevent double merges.
     /// </summary>
     public void SetBeingMerged(bool status)
     {
         _isBeingMerged = status;
-        // Можливо, тимчасово вимкнути колайдер, щоб уникнути подальших зіткнень під час анімації злиття
+        // Optionally disable collider temporarily to avoid further collisions during merge animation
         // _collider.enabled = !status; 
     }
 }
