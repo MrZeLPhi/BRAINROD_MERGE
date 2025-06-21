@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ece450d6-1efe-425e-bcdf-7c5b2a7c8443" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BRAINROD_MERGE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BRAINROD_MERGE/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" afterDir="false" />
-    </list>
+    <list default="true" id="ece450d6-1efe-425e-bcdf-7c5b2a7c8443" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,7 +107,7 @@
       <workItem from="1750236544024" duration="3231000" />
       <workItem from="1750242785619" duration="8370000" />
       <workItem from="1750318539736" duration="11705000" />
-      <workItem from="1750497903813" duration="1032000" />
+      <workItem from="1750497903813" duration="1396000" />
     </task>
     <servers />
   </component>
