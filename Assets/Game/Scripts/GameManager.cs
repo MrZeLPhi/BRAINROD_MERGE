@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _sessionHighScoreText; // UI Text for session high score
     [SerializeField] private TextMeshProUGUI _allTimeHighScoreText; // UI Text for all-time high score
     
+    [Header("Debugging / Performance")] // NEW HEADER
+    [SerializeField] private GameObject _graphyUIRoot; // NEW: Reference to the root GameObject of Graphy's UI
+    [SerializeField] private int _targetFrameRate = 60; // NEW: Desired target frame rate
+
     private bool _isGameOver = false; // Flag to prevent multiple game over calls
 
     private void Awake()
@@ -31,6 +35,9 @@ public class GameManager : MonoBehaviour
             Instance = this;
             // DontDestroyOnLoad(gameObject); // If GameManager should persist between scenes
         }
+
+        // Set target frame rate
+        Application.targetFrameRate = _targetFrameRate; // Using the serialized field for flexibility
 
         // Check for controller references
         if (_playerController == null) Debug.LogError("PlayerController is not assigned in GameManager!");
@@ -50,11 +57,39 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Game Over UI Panel is not assigned in GameManager. It won't be displayed!");
         }
+
+        // NEW: Ensure Graphy UI is initially hidden or shown based on your preference
+        if (_graphyUIRoot != null)
+        {
+            _graphyUIRoot.SetActive(false); // Initially hide Graphy
+        }
+        else
+        {
+            Debug.LogWarning("Graphy UI Root is not assigned in GameManager. Graphy toggle won't work!");
+        }
     }
 
     private void Start()
     {
         StartGame();
+    }
+
+    private void Update() // NEW: For input handling
+    {
+        // Toggle Graphy UI with 'E' key
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("E key pressed!"); // Додайте цей лог
+            if (_graphyUIRoot != null)
+            {
+                _graphyUIRoot.SetActive(!_graphyUIRoot.activeSelf);
+                Debug.Log($"Graphy UI active status: {_graphyUIRoot.activeSelf}"); // Додайте цей лог
+            }
+            else
+            {
+                Debug.LogWarning("Graphy UI Root is NULL when E key pressed!"); // Додайте цей лог
+            }
+        }
     }
 
     /// <summary>
@@ -125,11 +160,11 @@ public class GameManager : MonoBehaviour
             // Update high score display on the Game Over Panel
             if (_sessionHighScoreText != null && ScoreManager.Instance != null)
             {
-                _sessionHighScoreText.text = $"Score: {ScoreManager.Instance.SessionHighScore}";
+                _sessionHighScoreText.text = $"Сесія: {ScoreManager.Instance.SessionHighScore}";
             }
             if (_allTimeHighScoreText != null && ScoreManager.Instance != null)
             {
-                _allTimeHighScoreText.text = $"Record: {ScoreManager.Instance.AllTimeHighScore}";
+                _allTimeHighScoreText.text = $"Рекорд: {ScoreManager.Instance.AllTimeHighScore}";
             }
         }
         else
@@ -142,6 +177,12 @@ public class GameManager : MonoBehaviour
         // Disable player controls and spawning
         if (_playerController != null) _playerController.enabled = false;
         if (_spawnManager != null) _spawnManager.enabled = false;
+
+        // Hide Graphy when game is over
+        if (_graphyUIRoot != null)
+        {
+            _graphyUIRoot.SetActive(false); 
+        }
 
         // In a real game, you might wait for a button press on the UI before reloading.
     }
