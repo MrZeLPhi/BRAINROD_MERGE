@@ -160,11 +160,11 @@ public class GameManager : MonoBehaviour
             // Update high score display on the Game Over Panel
             if (_sessionHighScoreText != null && ScoreManager.Instance != null)
             {
-                _sessionHighScoreText.text = $"Сесія: {ScoreManager.Instance.SessionHighScore}";
+                _sessionHighScoreText.text = $"Your Score: {ScoreManager.Instance.SessionHighScore}";
             }
             if (_allTimeHighScoreText != null && ScoreManager.Instance != null)
             {
-                _allTimeHighScoreText.text = $"Рекорд: {ScoreManager.Instance.AllTimeHighScore}";
+                _allTimeHighScoreText.text = $"Best Score: {ScoreManager.Instance.AllTimeHighScore}";
             }
         }
         else
