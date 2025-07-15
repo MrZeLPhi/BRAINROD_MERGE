@@ -17,6 +17,10 @@ public class MergeDetector : MonoBehaviour
     [Header("Merge Effects")]
     [SerializeField] private ParticleSystem _mergeSmokeEffectPrefab; // ParticleSystem prefab for smoke effect on merge
     [SerializeField] private float _effectZOffset = -1f; // Z-offset for the effect to ensure it renders on top
+    
+    [Header("Player SFX")]
+    [Tooltip("Асет даних звуку вибуху. Перетягніть сюди SFX_Explosion з вікна Project.")]
+    public SFXData explosionSFXData; // Публічне посилання на SFXData асет
 
     [Header("Game Over Condition: Time in Trigger")] // NEW HEADER
     [SerializeField] private float _gameOverTimeLimit = 2.0f; // Time in seconds object can stay in trigger before game over
@@ -139,9 +143,12 @@ public class MergeDetector : MonoBehaviour
             smokeInstance.gameObject.SetActive(true); 
             smokeInstance.Play();
             
+            TriggerExplosion();
+            
             // Destroy effect after it finishes. Add a small buffer just in case.
             Destroy(smokeInstance.gameObject, smokeInstance.main.duration + 0.1f); 
         }
+        
 
         // Apply explosion force to surrounding objects BEFORE spawning the new one
         ApplyExplosionForce(mergePoint);
@@ -170,6 +177,27 @@ public class MergeDetector : MonoBehaviour
         // Destroy the original objects
         Destroy(otherObject.gameObject);
         Destroy(this.gameObject);
+    }
+    private void TriggerExplosion()
+    {
+        // Перевіряємо, чи SoundManager готовий
+        if (SoundManager.Instance == null)
+        {
+            Debug.LogError("SoundManager.Instance не знайдено! Неможливо відтворити вибух.");
+            return;
+        }
+
+        // Перевіряємо, чи призначено SFXData для вибуху
+        if (explosionSFXData == null)
+        {
+            Debug.LogWarning("SFXData для вибуху не призначено в Inspector для PlayerController.");
+            return;
+        }
+
+        // --- ВИКЛИК SFX ---
+        // Викликаємо PlaySFX, передаючи асет SFXData та позицію (якщо 3D звук)
+        SoundManager.Instance.PlaySFX(explosionSFXData, transform.position); // transform.position - позиція гравця
+        Debug.Log($"Відтворено звук вибуху: {explosionSFXData.name}");
     }
 
     /// <summary>

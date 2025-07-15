@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3474794779378993570}
   m_Layer: 0
   m_Name: picture 7
-  m_TagString: Untagged
+  m_TagString: Labubu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,3 +260,5 @@ MonoBehaviour:
     m_Bits: 1
   _mergeSmokeEffectPrefab: {fileID: 3388567169902759131, guid: d42134ad66073ce499187146b11b05c5, type: 3}
   _effectZOffset: -1
+  explosionSFXData: {fileID: 11400000, guid: 0d572c6ecd148fd409a469a5ec33e98b, type: 2}
+  _gameOverTimeLimit: 2

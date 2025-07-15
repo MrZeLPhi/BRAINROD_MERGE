@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca11eaa7417316d468a62c5b615233e7, type: 3}
+  m_Name: Music_Gameplay
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: dfe5612d1d96f4440ace3810d1c18ea8, type: 3}
+  outputAudioMixerGroup: {fileID: 1981507918007654899, guid: 054a8375ac8557c488a6ede066ca4ef1, type: 2}
+  volume: 0.206
+  minPitch: 0.9
+  maxPitch: 1.1
+  loop: 1
+  spatialBlend: 0
+  soundID: 
+  fadeInTime: 0.5
+  fadeOutTime: 0.5
+  stopPreviousMusic: 1

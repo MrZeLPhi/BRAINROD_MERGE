@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11985654243e2a64284e03f0c5207779, type: 3}
+  m_Name: SFX_Explosion
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 1f672d8a32f61ce4a8bab929e803e77f, type: 3}
+  outputAudioMixerGroup: {fileID: 1366353395036535039, guid: 054a8375ac8557c488a6ede066ca4ef1, type: 2}
+  volume: 0.3
+  minPitch: 0.5
+  maxPitch: 1.5
+  loop: 0
+  spatialBlend: 0
+  soundID: 1
+  canOverlap: 1
+  delay: 0
+  stopPreviousOfSameType: 0

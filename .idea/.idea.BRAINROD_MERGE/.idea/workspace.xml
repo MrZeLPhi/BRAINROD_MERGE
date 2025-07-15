@@ -5,7 +5,181 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ece450d6-1efe-425e-bcdf-7c5b2a7c8443" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/512677__jummit__human-jumping.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/512677__jummit__human-jumping.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/795300__spaghettisfx__kick-weapon.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/795300__spaghettisfx__kick-weapon.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Butten.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Butten.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Chill.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Chill.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Cosmos.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Cosmos.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Hit_a_mine.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Hit_a_mine.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Lonely Metal Astronaut 1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/Lonely Metal Astronaut 1.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/hr_gui_closepopup-00121.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/hr_gui_closepopup-00121.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/jump.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/jump.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/metal-hit-50-193312.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/metal-hit-50-193312.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/opoveschenie-v-kosmicheskoy-igre.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/opoveschenie-v-kosmicheskoy-igre.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/sfx-acceptation-363730.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Audio/Audio/sfx-acceptation-363730.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs/Canvas.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs/Canvas.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs/MainMenuManager.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs/MainMenuManager.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs/SettingsManager.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs/SettingsManager.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs/SoundManager.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Prefabs/SoundManager.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Scenes.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Scenes/Menu.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/Scenes/Menu.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/GameAudioMixer.mixer" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/GameAudioMixer.mixer.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/MainMenuManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/MainMenuManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SFX Data.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SFX Data/Music_Gameplay.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SFX Data/Music_Gameplay.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SFX Data/SFX_ButtonClick.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SFX Data/SFX_ButtonClick.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SFX Data/SFX_Explosion.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SFX Data/SFX_Explosion.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SettingsManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SettingsManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SoundManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SoundManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/MusicData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/MusicData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/SFXData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/SFXData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/SoundData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/SoundData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/example of sound comparison.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/example of sound comparison/BootstrapManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/example of sound comparison/BootstrapManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/example of sound comparison/GameActions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/example of sound comparison/GameActions.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scenes/MenuMain.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scenes/MenuMain.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/ShakeManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/ShakeManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/DynaPuff-VariableFont_wdth,wght.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/DynaPuff-VariableFont_wdth,wght.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/OFL.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/OFL.txt.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/README.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/README.txt.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff-Bold.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff-Medium.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff-Regular.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff-SemiBold.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_Condensed-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_Condensed-Bold.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_Condensed-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_Condensed-Medium.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_Condensed-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_Condensed-Regular.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_Condensed-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_Condensed-SemiBold.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_SemiCondensed-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_SemiCondensed-Bold.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_SemiCondensed-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_SemiCondensed-Medium.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_SemiCondensed-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_SemiCondensed-Regular.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_SemiCondensed-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/objTest/static/DynaPuff_SemiCondensed-SemiBold.ttf.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/DOTween.XML" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/DOTween.XML.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/DOTween.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/DOTween.dll.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.XML" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.XML.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/DOTweenIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/DOTweenIcon.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/DOTweenMiniIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/DOTweenMiniIcon.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/Footer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/Footer.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/Footer_dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/Footer_dark.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/Header.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/Header.jpg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleEPOOutline.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleEPOOutline.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUI.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/readme.txt.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BRAINROD_MERGE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BRAINROD_MERGE/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/P8 obgERROR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/P8 obgERROR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 4.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 5.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 5.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 6.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 6.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 7.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 7.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Test 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Test 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Test 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Test 2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Test 2.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Test 2.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Test 3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Test 3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Test 3.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Test 3.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Test 4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Test 4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Test 4.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Test 4.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/MergeDetector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/MergeDetector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/SpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/SpawnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/picture.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/picture/picture_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/picture/picture_11.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/picture/picture_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/picture/picture_2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/picture/picture_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/picture/picture_3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Labubu merger_BurstDebugInformation_DoNotShip/tempburstlibs/arm64-v8a/lib_burst_generated.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Нова папка/Labubu merger_BurstDebugInformation_DoNotShip/tempburstlibs/arm64-v8a/lib_burst_generated.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Labubu merger_BurstDebugInformation_DoNotShip/tempburstlibs/armeabi-v7a/lib_burst_generated.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Нова папка/Labubu merger_BurstDebugInformation_DoNotShip/tempburstlibs/armeabi-v7a/lib_burst_generated.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +190,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/SettingsManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/MusicData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/SFXData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/SoundData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/R.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/ScoreManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/ShakeManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@9b7e7eef789d/Editor/UGUI/UI/GraphicEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -110,7 +289,11 @@
       <workItem from="1750242785619" duration="8370000" />
       <workItem from="1750318539736" duration="11705000" />
       <workItem from="1750497903813" duration="2013000" />
-      <workItem from="1750664340904" duration="2662000" />
+      <workItem from="1750664340904" duration="3879000" />
+      <workItem from="1752156310697" duration="2584000" />
+      <workItem from="1752162927560" duration="1318000" />
+      <workItem from="1752478723080" duration="4133000" />
+      <workItem from="1752567796340" duration="2027000" />
     </task>
     <servers />
   </component>
