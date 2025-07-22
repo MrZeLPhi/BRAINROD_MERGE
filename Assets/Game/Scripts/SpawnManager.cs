@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Transform _spawnPoint; // Spawn point for ALL new objects (player's & merged)
     [SerializeField] private List<SpawnableObject> _spawnableObjects; // List of objects that can be spawned for the player, with their weights
     [SerializeField] private float _spawnDelay = 0.5f; // Delay before spawning a new player object
-    [SerializeField] private bool _test = true;
+    public bool _test = true;
     
     // Removed: Play Area Bounds (for finding free spawn spot) - no longer needed
 

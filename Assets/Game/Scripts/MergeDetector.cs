@@ -196,7 +196,7 @@ public class MergeDetector : MonoBehaviour
 
         // --- ВИКЛИК SFX ---
         // Викликаємо PlaySFX, передаючи асет SFXData та позицію (якщо 3D звук)
-        SoundManager.Instance.PlaySFX(explosionSFXData, transform.position); // transform.position - позиція гравця
+        SoundManager.Instance.PlaySFX(explosionSFXData); // transform.position - позиція гравця
         Debug.Log($"Відтворено звук вибуху: {explosionSFXData.name}");
     }
 

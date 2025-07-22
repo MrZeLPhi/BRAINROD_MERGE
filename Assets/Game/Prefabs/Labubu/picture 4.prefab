@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3046664481518154284}
   - component: {fileID: 6868908654344655156}
   - component: {fileID: 1769226947894342377}
+  - component: {fileID: 5123740156447287567}
   m_Layer: 0
   m_Name: picture 4
   m_TagString: Labubu
@@ -219,3 +220,15 @@ PolygonCollider2D:
       - {x: 1.0042684, y: -5.4124994}
       - {x: 2.5141952, y: -3.880249}
   m_UseDelaunayMesh: 0
+--- !u!114 &5123740156447287567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5732208376200219369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435efbd774930614aa750a5f7a81f14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

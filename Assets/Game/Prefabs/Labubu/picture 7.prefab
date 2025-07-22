@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1638077559652854968}
   - component: {fileID: 2905910984738594708}
   - component: {fileID: 3474794779378993570}
+  - component: {fileID: 6762233131798922059}
   m_Layer: 0
   m_Name: picture 7
   m_TagString: Labubu
@@ -262,3 +263,15 @@ MonoBehaviour:
   _effectZOffset: -1
   explosionSFXData: {fileID: 11400000, guid: 0d572c6ecd148fd409a469a5ec33e98b, type: 2}
   _gameOverTimeLimit: 2
+--- !u!114 &6762233131798922059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119049006399519042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435efbd774930614aa750a5f7a81f14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

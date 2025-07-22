@@ -46,18 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsButton: {fileID: 0}
   shopButton: {fileID: 0}
+  levelPlayButton: {fileID: 0}
   settingsPanel: {fileID: 0}
   settingsCloseButton: {fileID: 0}
   shopPanel: {fileID: 0}
   shopCloseButton: {fileID: 0}
   campaignPanel: {fileID: 0}
-  levelNameText: {fileID: 0}
-  levelPlayButton: {fileID: 0}
-  levelsContainer: {fileID: 0}
-  levelsLayoutGroup: {fileID: 0}
-  snapSpeed: 5
-  swipeThreshold: 50
-  levelSceneBuildIndices: 010000000200000003000000
+  levelSwipeManager: {fileID: 0}
   masterSoundToggleRef: {fileID: 0}
   sfxSliderRef: {fileID: 0}
   menuSoundSliderRef: {fileID: 0}
