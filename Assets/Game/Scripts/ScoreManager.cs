@@ -1,17 +1,26 @@
 using UnityEngine;
-using TMPro; // Assuming you are using TextMeshPro for UI Text
+using TMPro; 
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Singleton pattern for easy access from other scripts
     public static ScoreManager Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI _scoreText; // UI Text to display the current score
-    private int _currentScore;
-    private int _sessionHighScore; // NEW: Max score achieved in the current game session
-    private int _allTimeHighScore; // NEW: Max score achieved across all game sessions
+    [Header("UI Text References")]
+    [SerializeField] private TextMeshProUGUI _t1; // T1: Current score
+    [SerializeField] private TextMeshProUGUI _t2; // T2: All-time high score (live display)
+    [SerializeField] private TextMeshProUGUI _t3; // T3: Session high score (Game Over panel)
+    [SerializeField] private TextMeshProUGUI _t4; // T4: All-time high score (Game Over panel)
+    
+    [Header("Save High Score Buttons")]
+    [Tooltip("Список кнопок, натискання на які збереже рекорд, якщо він новий.")]
+    public List<Button> saveHighScoreButtons;
 
-    // Key for PlayerPrefs to store all-time high score
+    private int _currentScore;
+    private int _sessionHighScore; 
+    private int _allTimeHighScore; 
+
     private const string AllTimeHighScoreKey = "AllTimeHighScore"; 
 
     public int CurrentScore
@@ -20,26 +29,22 @@ public class ScoreManager : MonoBehaviour
         private set
         {
             _currentScore = value;
-            UpdateScoreUI(); // Update UI whenever score changes
+            UpdateCurrentScoreUI(); 
 
-            // Update session high score if current score surpasses it
             if (_currentScore > _sessionHighScore)
             {
                 _sessionHighScore = _currentScore;
+                UpdateLiveHighScoreUI();
             }
         }
     }
 
-    // NEW: Public accessor for session high score
     public int SessionHighScore => _sessionHighScore;
-
-    // NEW: Public accessor for all-time high score
     public int AllTimeHighScore => _allTimeHighScore;
 
 
     private void Awake()
     {
-        // Singleton implementation
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -47,25 +52,20 @@ public class ScoreManager : MonoBehaviour
         else
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject); // If ScoreManager should persist between scenes
         }
 
-        if (_scoreText == null)
-        {
-            Debug.LogError("Score Text (TextMeshProUGUI) is not assigned in ScoreManager!");
-        }
-
-        // Load all-time high score from PlayerPrefs when the game starts
+        if (_t1 == null) Debug.LogError("T1 Score Text (TextMeshProUGUI) is not assigned in ScoreManager!");
+        if (_t2 == null) Debug.LogWarning("T2 Max Score Text (TextMeshProUGUI) is not assigned! Max score won't be displayed on start.");
+        
         _allTimeHighScore = PlayerPrefs.GetInt(AllTimeHighScoreKey, 0);
 
-        // Initialize session high score and current score
         ResetScore(); 
+        
+        UpdateLiveHighScoreUI();
+
+        AddListenersToSaveButtons();
     }
 
-    /// <summary>
-    /// Adds points to the global score.
-    /// </summary>
-    /// <param name="pointsToAdd">The amount of points to add.</param>
     public void AddPoints(int pointsToAdd)
     {
         if (pointsToAdd < 0)
@@ -77,41 +77,55 @@ public class ScoreManager : MonoBehaviour
         Debug.Log($"Added {pointsToAdd} points. New score: {CurrentScore}");
     }
 
-    /// <summary>
-    /// Updates the score display in the UI.
-    /// </summary>
-    private void UpdateScoreUI()
+    private void UpdateCurrentScoreUI()
     {
-        if (_scoreText != null)
+        if (_t1 != null)
         {
-            _scoreText.text = $"{CurrentScore}";
+            _t1.text = $"{CurrentScore}";
         }
     }
 
-    /// <summary>
-    /// Resets the current score to 0 and session high score.
-    /// Called at the start of a new game.
-    /// </summary>
-    public void ResetScore()
+    public void UpdateLiveHighScoreUI()
     {
-        CurrentScore = 0; // Will also update _sessionHighScore to 0 if CurrentScore becomes 0
-        _sessionHighScore = 0; // Explicitly reset session high score for new game
+        if (_t2 != null)
+        {
+            _t2.text = $"{(CurrentScore > _allTimeHighScore ? CurrentScore : _allTimeHighScore)}";
+        }
     }
 
-    /// <summary>
-    /// Saves the current session's high score to all-time high score if it's greater.
-    /// Should be called when the game ends (Game Over).
-    /// </summary>
+    public void ResetScore()
+    {
+        CurrentScore = 0; 
+        _sessionHighScore = 0; 
+    }
+
     public void SaveHighScores()
     {
-        // Check if session high score is greater than all-time high score
         if (_sessionHighScore > _allTimeHighScore)
         {
             _allTimeHighScore = _sessionHighScore;
             PlayerPrefs.SetInt(AllTimeHighScoreKey, _allTimeHighScore);
-            PlayerPrefs.Save(); // Save changes to disk
+            PlayerPrefs.Save(); 
             Debug.Log($"New All-Time High Score: {_allTimeHighScore}");
+            
+            UpdateLiveHighScoreUI();
         }
-        Debug.Log($"Session High Score: {_sessionHighScore}");
+        else
+        {
+             Debug.Log("Current high score is not a new record. No save needed.");
+        }
+    }
+    
+    private void AddListenersToSaveButtons()
+    {
+        if (saveHighScoreButtons == null) return;
+
+        foreach (Button button in saveHighScoreButtons)
+        {
+            if (button != null)
+            {
+                button.onClick.AddListener(SaveHighScores);
+            }
+        }
     }
 }

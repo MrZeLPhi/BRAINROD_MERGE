@@ -1,22 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Assuming TextMeshPro for UI text
+using TMPro; 
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening; // For DOTween (ensure it's imported in your project)
+using DG.Tweening; 
+using System;
+using Random = UnityEngine.Random;
 
 public class ShakeController : MonoBehaviour
 {
     public static ShakeController Instance { get; private set; }
 
+    public static event Action OnShakeSequenceStarted;
+    public static event Action OnShakeSequenceEnded;
+
     [Header("Dependencies")]
     [Tooltip("Посилання на ваш SpawnManager. Перетягніть GameObject з SpawnManager сюди.")]
-    public SpawnManager spawnManagerRef; // Посилання на SpawnManager
+    public SpawnManager spawnManagerRef; 
     [Tooltip("Колайдер, який потрібно модифікувати (isTrigger). Перетягніть сюди Collider або GameObject з ним.")]
     public BoxCollider2D targetCollider;
 
     [Tooltip("Список MonoBehaviour скриптів, які потрібно вимкнути на час міні-гри (наприклад, PlayerController, EnemyAI).")]
-    public List<MonoBehaviour> gameLogicScriptsToPause; 
+    public List<MonoBehaviour> gameLogicScriptsToPause; // ЦЕЙ СПИСОК ПОВЕРНЕНО СЮДИ
 
     [Header("UI References")]
     [Tooltip("Головна панель UI для міні-гри тряски.")]
@@ -41,10 +46,10 @@ public class ShakeController : MonoBehaviour
     public Camera mainCamera;
     [Tooltip("How quickly camera returns to original position after a shake impulse.")]
     public float shakeDampening = 5f; 
-    private Vector3 _originalCameraLocalPos; // Saved original camera position
+    private Vector3 _originalCameraLocalPos; 
 
     [Tooltip("The sensitivity of camera shake to device acceleration.")] 
-    public float shakeSensitivity = 0.05f; // How much acceleration translates to camera movement
+    public float shakeSensitivity = 0.05f; 
 
     [Tooltip("Minimum acceleration magnitude change to trigger a shake impulse.")]
     public float shakeThreshold = 0.5f; 
@@ -54,17 +59,14 @@ public class ShakeController : MonoBehaviour
     [Tooltip("Сила імпульсу, що застосовується до об'єктів при виявленні тряски.")] 
     public float objectShakeImpulseForce = 0.5f;
 
-    // Внутрішні змінні стану
     private Vector3 _lastAcceleration = Vector3.zero; 
     private Vector3 _currentCameraShakeOffset = Vector3.zero; 
     private bool _isShakeInputActive = false; 
     private bool _isSequenceRunning = false; 
 
-    // Зберігаємо початковий стан SpawnManager._test та Collider.isTrigger
     private bool _originalSpawnManagerTestValue;
-    private bool _originalColliderIsTriggerValue;
-    // Зберігаємо початковий стан активованих скриптів
-    private Dictionary<MonoBehaviour, bool> _originalScriptStates = new Dictionary<MonoBehaviour, bool>();
+    private bool _originalColliderIsTriggerValue; 
+    private Dictionary<MonoBehaviour, bool> _originalScriptStates = new Dictionary<MonoBehaviour, bool>(); 
 
 
     void Awake()
@@ -75,9 +77,7 @@ public class ShakeController : MonoBehaviour
             return;
         }
         Instance = this;
-        // DontDestroyOnLoad(gameObject); 
 
-        // Ініціалізація камери та її позиції
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
@@ -91,17 +91,14 @@ public class ShakeController : MonoBehaviour
             Debug.LogError("ShakeController: Головна камера не призначена або не знайдена в Awake.");
         }
 
-        // Приховуємо панель міні-гри на старті
         if (shakeMinigamePanel != null)
         {
             shakeMinigamePanel.SetActive(false);
         }
     }
 
-    // Update викликається кожен кадр, але ми будемо обробляти акселерометр лише тоді, коли _isShakeInputActive = true.
     void Update()
     {
-        // Камера завжди повертається до початкового положення, якщо немає активної тряски
         if (!_isShakeInputActive && mainCamera != null && _currentCameraShakeOffset.magnitude > 0.001f)
         {
              _currentCameraShakeOffset = Vector3.Lerp(_currentCameraShakeOffset, Vector3.zero, Time.deltaTime * shakeDampening * 2); 
@@ -115,7 +112,6 @@ public class ShakeController : MonoBehaviour
 
         if (!_isShakeInputActive || mainCamera == null || !Application.isMobilePlatform)
         {
-            // Обробляємо акселерометр лише під час активного вікна тряски і лише на мобільних пристроях
             return;
         }
 
@@ -124,13 +120,10 @@ public class ShakeController : MonoBehaviour
         
         _lastAcceleration = currentAcceleration;
 
-        // Перевіряємо, чи сила ривка (зміна прискорення) перевищує поріг
         if (deltaAcceleration.magnitude > shakeThreshold) 
         {
-            // Застосовуємо силу до об'єктів Labubu
             ApplyShakeToLabubuObjects(deltaAcceleration);
 
-            // Додаємо імпульс до зміщення камери
             _currentCameraShakeOffset += (Vector3)Random.insideUnitCircle * (deltaAcceleration.magnitude * shakeSensitivity); 
         }
     }
@@ -144,11 +137,10 @@ public class ShakeController : MonoBehaviour
     {
         if (_isSequenceRunning)
         {
-            Debug.LogWarning("Shake sequence is already running. Ignoring new request.");
+            Debug.LogWarning("ShakeController: Shake sequence is already running. Ignoring new request.");
             return;
         }
 
-        // Перевірка необхідних посилань (тепер вони є полями класу)
         if (spawnManagerRef == null || targetCollider == null || shakeMinigamePanel == null || shakeAnimator == null || countdownText == null)
         {
             Debug.LogError("ShakeController: Missing required references. Please assign all fields in Inspector. Aborting.");
@@ -156,25 +148,30 @@ public class ShakeController : MonoBehaviour
         }
         
         _isSequenceRunning = true;
-        Debug.Log("Shake Sequence Started!");
+        Debug.Log("ShakeController: Shake Sequence Started!");
 
-        // --- 1. Призупинення ігрової логіки ---
-        // Зберігаємо початкові значення SpawnManager._test та Collider.isTrigger
+        // --- 1. ПРИЗУПИНЕННЯ ІГРОВОЇ ЛОГІКИ ---
         if (spawnManagerRef != null)
         {
             _originalSpawnManagerTestValue = spawnManagerRef._test; 
             spawnManagerRef._test = false; 
-            Debug.Log($"SpawnManager._test set to false.");
+            Debug.Log($"ShakeController: Збережено SpawnManager._test: {_originalSpawnManagerTestValue}. Встановлено на false."); 
+        }
+        else
+        {
+             Debug.LogError("ShakeController: SpawnManagerRef не призначено."); 
         }
 
         if (targetCollider != null)
         {
-            _originalColliderIsTriggerValue = targetCollider.isTrigger;
-            targetCollider.isTrigger = false; 
-            Debug.Log($"Collider '{targetCollider.name}' isTrigger set to False.");
+            _originalColliderIsTriggerValue = targetCollider.isTrigger; 
+            Debug.Log($"ShakeController: Збережено targetCollider.isTrigger: {_originalColliderIsTriggerValue}."); 
+        }
+        else
+        {
+            Debug.LogError("ShakeController: TargetCollider не призначено."); 
         }
 
-        // Вимикаємо інші ігрові скрипти
         _originalScriptStates.Clear();
         foreach (MonoBehaviour script in gameLogicScriptsToPause)
         {
@@ -182,7 +179,22 @@ public class ShakeController : MonoBehaviour
             {
                 _originalScriptStates[script] = script.enabled; 
                 script.enabled = false; 
+                Debug.Log($"ShakeController: Скрипт {script.name} вимкнено. Оригінальний стан: {_originalScriptStates[script]}"); 
             }
+            else
+            {
+                Debug.LogWarning("ShakeController: gameLogicScriptsToPause містить NULL скрипт. Будь ласка, перевірте Inspector."); 
+            }
+        }
+        
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.PauseGame(); 
+            Debug.Log("ShakeController: Викликано GameManager.Instance.PauseGame()");
+        }
+        else
+        {
+            Debug.LogError("ShakeController: GameManager.Instance не знайдено! Неможливо викликати паузу.");
         }
 
         // Показуємо UI панель міні-гри
@@ -195,42 +207,39 @@ public class ShakeController : MonoBehaviour
 
     private IEnumerator FullShakeSequenceCoroutine()
     {
-        // Зворотний відлік
         yield return StartCoroutine(CountdownCoroutine(preShakeCountdownTime));
 
-        // Активне вікно для тряски та анімації
+        if (targetCollider != null)
+        {
+            targetCollider.isTrigger = false; 
+            Debug.Log($"ShakeController: Collider '{targetCollider.name}' isTrigger set to False for active shake."); 
+        }
+
         _isShakeInputActive = true; 
         _lastAcceleration = Input.acceleration; 
         
-        // Запускаємо анімацію UI
         if (shakeAnimator != null)
         {
             shakeAnimator.SetTrigger(startAnimationTrigger); 
-            Debug.Log($"Animator trigger '{startAnimationTrigger}' set.");
+            Debug.Log($"ShakeController: Animator trigger '{startAnimationTrigger}' set.");
         }
         
-        // Чекаємо завершення активного вікна тряски
         yield return new WaitForSeconds(activeShakeWindowDuration); 
 
-        // 3. Завершення фази тряски
         _isShakeInputActive = false; 
         
-        // Завершуємо анімацію UI
         if (shakeAnimator != null)
         {
             shakeAnimator.SetTrigger(endAnimationTrigger); 
-            Debug.Log($"Animator trigger '{endAnimationTrigger}' set.");
+            Debug.Log($"ShakeController: Animator trigger '{endAnimationTrigger}' set.");
         }
         
-        // --- 4. Завершення міні-гри ---
         EndShakeSequence();
     }
 
-    // Корутина для зворотного відліку
     private IEnumerator CountdownCoroutine(float time)
     {
         countdownText.gameObject.SetActive(true); 
-        // Анімація відліку через DOTween
         DOTween.Sequence()
             .Append(countdownText.rectTransform.DOScale(Vector3.one * 1.5f, 0.2f).SetEase(Ease.OutBack)) 
             .Append(countdownText.rectTransform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutQuad))      
@@ -249,7 +258,6 @@ public class ShakeController : MonoBehaviour
         countdownText.transform.localScale = Vector3.one; 
     }
 
-    // Застосування фізичної тряски до об'єктів Labubu
     private void ApplyShakeToLabubuObjects(Vector3 deltaAcceleration)
     {
         GameObject[] labubuObjects = GameObject.FindGameObjectsWithTag(shakeableObjectsTag); 
@@ -258,72 +266,88 @@ public class ShakeController : MonoBehaviour
             ObjectShaker objShaker = obj.GetComponent<ObjectShaker>();
             if (objShaker != null)
             {
-                // Застосовуємо імпульс, що залежить від сили тряски телефону
                 Vector2 impulseDirection = (Vector2)Random.insideUnitCircle.normalized; 
                 objShaker.ApplyShakeImpulse(impulseDirection * objectShakeImpulseForce * deltaAcceleration.magnitude); 
             }
         }
     }
 
-    // --- ЗМІНА ТУТ: Виклик нової корутини для затримки відновлення колайдера ---
     public void EndShakeSequence()
     {
         if (!_isSequenceRunning) return; 
 
         _isSequenceRunning = false;
 
-        // Приховуємо UI панель
         shakeMinigamePanel.SetActive(false);
         if (countdownText != null) countdownText.gameObject.SetActive(false);
         
-        // Відновлюємо SpawnManager._test
         if (spawnManagerRef != null)
         {
             spawnManagerRef._test = _originalSpawnManagerTestValue; 
-            Debug.Log($"SpawnManager._test restored to {_originalSpawnManagerTestValue}.");
+            Debug.Log($"ShakeController: SpawnManager._test restored to {_originalSpawnManagerTestValue}."); 
+        }
+        else
+        {
+             Debug.LogError("ShakeController: SpawnManagerRef став NULL при спробі відновлення."); 
         }
 
-        // Запускаємо корутину для затримки відновлення колайдера
-        if (targetCollider != null)
-        {
-            StartCoroutine(RestoreColliderStateAfterDelay());
-        }
-        
-        // Відновлюємо інші ігрові скрипти
         foreach (var entry in _originalScriptStates)
         {
             if (entry.Key != null)
             {
                 entry.Key.enabled = entry.Value; 
+                Debug.Log($"ShakeController: Скрипт {entry.Key.name} відновлено до enabled={entry.Value}."); 
+            }
+            else
+            {
+                Debug.LogWarning("ShakeController: _originalScriptStates містить NULL скрипт (можливо, об'єкт був знищений)."); 
             }
         }
         _originalScriptStates.Clear(); 
 
-        Debug.Log("Shake Minigame Ended. Game Resumed.");
+        if (targetCollider != null)
+        {
+            StartCoroutine(RestoreColliderStateAfterDelay()); 
+        }
+        else
+        {
+            Debug.LogError("ShakeController: TargetCollider став NULL при спробі відновити його після Shake. Можливо, об'єкт був знищений."); 
+        }
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ResumeGame(); 
+            Debug.Log("ShakeController: Викликано GameManager.Instance.ResumeGame()"); 
+        }
+        else
+        {
+            Debug.LogError("ShakeController: GameManager.Instance не знайдено! Неможливо відновити гру через GameManager.");
+        }
+        Debug.Log("ShakeController: Shake Minigame Ended. Game Resumed.");
     }
 
-    // --- НОВА КОРУТИНА: Чекає 1 секунду і відновлює стан колайдера ---
     private IEnumerator RestoreColliderStateAfterDelay()
     {
-        // Чекаємо одну секунду
+        Debug.Log("ShakeController: Починаю RestoreColliderStateAfterDelay (1 сек затримки)."); 
         yield return new WaitForSeconds(1f);
 
-        // Відновлюємо Collider.isTrigger
         if (targetCollider != null)
         {
             targetCollider.isTrigger = _originalColliderIsTriggerValue; 
-            Debug.Log($"Collider '{targetCollider.name}' isTrigger restored to {_originalColliderIsTriggerValue}.");
+            Debug.Log($"Collider '{targetCollider.name}' isTrigger restored to {_originalColliderIsTriggerValue}."); 
+        }
+        else
+        {
+            Debug.LogError("ShakeController: TargetCollider став NULL при спробі відновлення."); 
         }
     }
 
-    // Прибирання при вимкненні об'єкта ShakeController (наприклад, при зміні сцени або Destroy)
     void OnDisable()
     {
         if (_isSequenceRunning)
         {
             EndShakeSequence(); 
         }
-        // Забезпечуємо, що камера повертається в початкове положення
         if (mainCamera != null && _originalCameraLocalPos != Vector3.zero)
         {
             mainCamera.transform.localPosition = _originalCameraLocalPos;

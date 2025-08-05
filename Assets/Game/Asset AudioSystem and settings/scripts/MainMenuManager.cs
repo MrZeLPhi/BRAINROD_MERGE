@@ -11,6 +11,8 @@ public class MainMenuManager : MonoBehaviour
     public Button settingsButton;
     public Button shopButton;
     public Button levelPlayButton; 
+    public Button ExitButton; 
+    public string nameScenePlayButton = "SampleScene";
 
     [Header("Panels")]
     public GameObject settingsPanel;
@@ -23,7 +25,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject campaignPanel; 
     
     // ЗМІНА: Посилання на окремий менеджер для свайпу рівнів
-    public LevelSwipeManager levelSwipeManager; 
+   // public LevelSwipeManager levelSwipeManager; 
 
     // Private змінна для зберігання посилання на екземпляр SettingsManager
     private SettingsManager _settingsManagerInstance; 
@@ -59,14 +61,43 @@ public class MainMenuManager : MonoBehaviour
         if (shopCloseButton != null) shopCloseButton.onClick.AddListener(HideShopPanel);
 
         // ЗМІНА: Кнопка Play тепер викликає метод на LevelSwipeManager
-        if (levelPlayButton != null && levelSwipeManager != null) 
+        // if (levelPlayButton != null && levelSwipeManager != null) 
+        // {
+        //     levelPlayButton.onClick.AddListener(levelSwipeManager.PlaySelectedLevel);
+        // }
+        // else
+        // {
+        //     if (levelPlayButton != null) Debug.LogError("MainMenuManager: levelSwipeManager не призначено. Кнопка 'Play' не буде працювати.");
+        // }
+        if(levelPlayButton != null)
         {
-            levelPlayButton.onClick.AddListener(levelSwipeManager.PlaySelectedLevel);
+            // Приклад: якщо граєш без LevelSwipeManager, то кнопка Play може просто завантажувати сцену гри.
+            // Заміни "GameScene" на назву твоєї ігрової сцени в новому проекті.
+            levelPlayButton.onClick.AddListener(() => SceneManager.LoadScene(nameScenePlayButton));
         }
         else
         {
-            if (levelPlayButton != null) Debug.LogError("MainMenuManager: levelSwipeManager не призначено. Кнопка 'Play' не буде працювати.");
+            Debug.LogWarning("Кнопка 'Play' не призначена. Кнопка 'Play' не буде працювати.");
         }
+        
+        if (ExitButton != null)
+        {
+            ExitButton.onClick.AddListener(ExitGame);
+        }
+
+    }
+    public void ExitGame()
+    {
+        Debug.Log("Вихід з гри...");
+
+        // Коректний вихід з програми
+    #if UNITY_EDITOR
+            // Ця логіка виконується тільки в Unity Editor
+            UnityEditor.EditorApplication.isPlaying = false;
+    #else
+        // Ця логіка виконується в збірці (Standalone Build)
+        Application.Quit();
+    #endif
     }
 
     // --- Методи для UI панелей ---
