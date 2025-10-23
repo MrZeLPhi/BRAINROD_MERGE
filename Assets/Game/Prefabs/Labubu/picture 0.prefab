@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2778889893483031279}
   - component: {fileID: 1432570651308223576}
   - component: {fileID: -3304729236265173717}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: picture 0
   m_TagString: Labubu
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7309714579859653759}
   - component: {fileID: 8156994314718838565}
   - component: {fileID: 3343086826471223969}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P8 obgERROR
   m_TagString: Labubu
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2506315888995807534}
   - component: {fileID: 1429068190290885351}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pngERROR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

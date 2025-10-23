@@ -13,50 +13,35 @@ public class ShakeController : MonoBehaviour
 
     public static event Action OnShakeSequenceStarted;
     public static event Action OnShakeSequenceEnded;
+    
+    public bool IsSequenceRunning => _isSequenceRunning;
 
     [Header("Dependencies")]
-    [Tooltip("Посилання на ваш SpawnManager. Перетягніть GameObject з SpawnManager сюди.")]
     public SpawnManager spawnManagerRef; 
-    [Tooltip("Колайдер, який потрібно модифікувати (isTrigger). Перетягніть сюди Collider або GameObject з ним.")]
     public BoxCollider2D targetCollider;
 
     [Tooltip("Список MonoBehaviour скриптів, які потрібно вимкнути на час міні-гри (наприклад, PlayerController, EnemyAI).")]
-    public List<MonoBehaviour> gameLogicScriptsToPause; // ЦЕЙ СПИСОК ПОВЕРНЕНО СЮДИ
+    public List<MonoBehaviour> gameLogicScriptsToPause; 
 
     [Header("UI References")]
-    [Tooltip("Головна панель UI для міні-гри тряски.")]
     public GameObject shakeMinigamePanel;
-    [Tooltip("TextMeshPro текст для зворотного відліку.")]
     public TextMeshProUGUI countdownText; 
-    [Tooltip("Animator на UI-панелі для анімації картинки.")]
     public Animator shakeAnimator; 
-    [Tooltip("Назва тригера в Animator для запуску анімації тряски (наприклад, 'StartAnimation').")]
     public string startAnimationTrigger = "StartAnimation";
-    [Tooltip("Назва тригера в Animator для завершення анімації тряски (наприклад, 'EndAnimation').")]
     public string endAnimationTrigger = "EndAnimation";
 
     [Header("Minigame Timings")]
-    [Tooltip("Час зворотного відліку перед початком активної тряски (у секундах).")]
     public float preShakeCountdownTime = 3f;
-    [Tooltip("Тривалість активного вікна для тряски телефону та анімації (у секундах).")]
     public float activeShakeWindowDuration = 3f; 
 
     [Header("Shake Physics Settings")]
-    [Tooltip("The camera to shake. Should be assigned automatically or manually.")]
     public Camera mainCamera;
-    [Tooltip("How quickly camera returns to original position after a shake impulse.")]
     public float shakeDampening = 5f; 
     private Vector3 _originalCameraLocalPos; 
 
-    [Tooltip("The sensitivity of camera shake to device acceleration.")] 
     public float shakeSensitivity = 0.05f; 
-
-    [Tooltip("Minimum acceleration magnitude change to trigger a shake impulse.")]
     public float shakeThreshold = 0.5f; 
-
-    [Tooltip("Тег об'єктів, які мають трястися (завжди 'Labubu').")] 
     public string shakeableObjectsTag = "Labubu"; 
-    [Tooltip("Сила імпульсу, що застосовується до об'єктів при виявленні тряски.")] 
     public float objectShakeImpulseForce = 0.5f;
 
     private Vector3 _lastAcceleration = Vector3.zero; 
@@ -101,6 +86,7 @@ public class ShakeController : MonoBehaviour
     {
         if (!_isShakeInputActive && mainCamera != null && _currentCameraShakeOffset.magnitude > 0.001f)
         {
+             // Ця частина також має працювати, навіть якщо час не заморожений
              _currentCameraShakeOffset = Vector3.Lerp(_currentCameraShakeOffset, Vector3.zero, Time.deltaTime * shakeDampening * 2); 
              mainCamera.transform.localPosition = _originalCameraLocalPos + _currentCameraShakeOffset;
         }
@@ -109,7 +95,7 @@ public class ShakeController : MonoBehaviour
             mainCamera.transform.localPosition = _originalCameraLocalPos;
         }
 
-
+        // Ця умова тепер перевіряє тільки _isShakeInputActive, щоб не залежати від Time.timeScale
         if (!_isShakeInputActive || mainCamera == null || !Application.isMobilePlatform)
         {
             return;
@@ -128,11 +114,6 @@ public class ShakeController : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// Запускає повну послідовність міні-гри тряски.
-    /// Цей метод викликається з кнопки, після реклами тощо.
-    /// </summary>
     public void StartShakeSequence() 
     {
         if (_isSequenceRunning)
@@ -150,7 +131,10 @@ public class ShakeController : MonoBehaviour
         _isSequenceRunning = true;
         Debug.Log("ShakeController: Shake Sequence Started!");
 
-        // --- 1. ПРИЗУПИНЕННЯ ІГРОВОЇ ЛОГІКИ ---
+        // Пауза більше не потрібна. Просто вимикаємо логіку
+        Debug.Log("ShakeController: Game not paused, but game logic scripts are disabled.");
+        OnShakeSequenceStarted?.Invoke();
+
         if (spawnManagerRef != null)
         {
             _originalSpawnManagerTestValue = spawnManagerRef._test; 
@@ -159,7 +143,7 @@ public class ShakeController : MonoBehaviour
         }
         else
         {
-             Debug.LogError("ShakeController: SpawnManagerRef не призначено."); 
+            Debug.LogError("ShakeController: SpawnManagerRef не призначено."); 
         }
 
         if (targetCollider != null)
@@ -178,7 +162,7 @@ public class ShakeController : MonoBehaviour
             if (script != null)
             {
                 _originalScriptStates[script] = script.enabled; 
-                script.enabled = false; 
+                script.enabled = false; // Вимикаємо скрипти логіки
                 Debug.Log($"ShakeController: Скрипт {script.name} вимкнено. Оригінальний стан: {_originalScriptStates[script]}"); 
             }
             else
@@ -187,21 +171,9 @@ public class ShakeController : MonoBehaviour
             }
         }
         
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.PauseGame(); 
-            Debug.Log("ShakeController: Викликано GameManager.Instance.PauseGame()");
-        }
-        else
-        {
-            Debug.LogError("ShakeController: GameManager.Instance не знайдено! Неможливо викликати паузу.");
-        }
-
-        // Показуємо UI панель міні-гри
         shakeMinigamePanel.SetActive(true);
         countdownText.gameObject.SetActive(true); 
         
-        // --- 2. Запускаємо послідовність міні-гри (корутини) ---
         StartCoroutine(FullShakeSequenceCoroutine());
     }
 
@@ -224,7 +196,13 @@ public class ShakeController : MonoBehaviour
             Debug.Log($"ShakeController: Animator trigger '{startAnimationTrigger}' set.");
         }
         
-        yield return new WaitForSeconds(activeShakeWindowDuration); 
+        // Використовуємо Time.unscaledDeltaTime, оскільки Time.timeScale може бути 0 з інших причин
+        float timer = activeShakeWindowDuration;
+        while (timer > 0)
+        {
+            timer -= Time.unscaledDeltaTime;
+            yield return null;
+        }
 
         _isShakeInputActive = false; 
         
@@ -250,7 +228,7 @@ public class ShakeController : MonoBehaviour
         while (timer > 0)
         {
             countdownText.text = Mathf.CeilToInt(timer).ToString(); 
-            timer -= Time.deltaTime; 
+            timer -= Time.unscaledDeltaTime; 
             yield return null;
         }
         DOTween.Kill(countdownText.transform); 
@@ -288,14 +266,14 @@ public class ShakeController : MonoBehaviour
         }
         else
         {
-             Debug.LogError("ShakeController: SpawnManagerRef став NULL при спробі відновлення."); 
+            Debug.LogError("ShakeController: SpawnManagerRef став NULL при спробі відновлення."); 
         }
 
         foreach (var entry in _originalScriptStates)
         {
             if (entry.Key != null)
             {
-                entry.Key.enabled = entry.Value; 
+                entry.Key.enabled = entry.Value; // Відновлюємо скрипти
                 Debug.Log($"ShakeController: Скрипт {entry.Key.name} відновлено до enabled={entry.Value}."); 
             }
             else
@@ -314,16 +292,9 @@ public class ShakeController : MonoBehaviour
             Debug.LogError("ShakeController: TargetCollider став NULL при спробі відновити його після Shake. Можливо, об'єкт був знищений."); 
         }
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.ResumeGame(); 
-            Debug.Log("ShakeController: Викликано GameManager.Instance.ResumeGame()"); 
-        }
-        else
-        {
-            Debug.LogError("ShakeController: GameManager.Instance не знайдено! Неможливо відновити гру через GameManager.");
-        }
         Debug.Log("ShakeController: Shake Minigame Ended. Game Resumed.");
+        // Викликаємо подію про завершення
+        OnShakeSequenceEnded?.Invoke();
     }
 
     private IEnumerator RestoreColliderStateAfterDelay()

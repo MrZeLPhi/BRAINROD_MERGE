@@ -6,7 +6,30 @@
   <component name="ChangeListManager">
     <list default="true" id="ece450d6-1efe-425e-bcdf-7c5b2a7c8443" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BRAINROD_MERGE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BRAINROD_MERGE/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/Animation/ShakeLoopAnimation.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/Animation/ShakeLoopAnimation.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/P8 obgERROR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/P8 obgERROR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 4.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 5.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 5.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 6.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 6.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 7.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Labubu/picture 7.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/MenuMain.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/MenuMain.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Test 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Test 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/MergeDetector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/MergeDetector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/ShakeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/ShakeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/sprites/image_2025-07-28_11-20-45.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/sprites/image_2025-07-28_11-20-45.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/sprites/image_2025-07-28_11-22-13.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/sprites/image_2025-07-28_11-22-13.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/sprites/image_2025-07-28_11-22-38.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/sprites/image_2025-07-28_11-22-38.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/sprites/image_2025-08-01_17-36-44.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/sprites/image_2025-08-01_17-36-44.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/sprites/Монтажgfdghа область 1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/sprites/Монтажgfdghа область 1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +45,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/MusicData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/SFXData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Asset AudioSystem and settings/scripts/cllas/SoundData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Prefabs/Effects/InputEffectManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Event/DeleteManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Event/EventManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Event/EventPrefabData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Event/EventPrefabHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Event/EventSequenceManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/ObjectShaker.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/R.cs" root0="FORCE_HIGHLIGHTING" />
@@ -136,6 +164,15 @@
       <workItem from="1754381999592" duration="7744000" />
       <workItem from="1754394228519" duration="1139000" />
       <workItem from="1754397054970" duration="1576000" />
+      <workItem from="1754472959090" duration="9303000" />
+      <workItem from="1754642193481" duration="7092000" />
+      <workItem from="1754685416101" duration="5415000" />
+      <workItem from="1754700161362" duration="4817000" />
+      <workItem from="1754705899960" duration="4358000" />
+      <workItem from="1754904490111" duration="725000" />
+      <workItem from="1754905661707" duration="9550000" />
+      <workItem from="1755680800395" duration="1260000" />
+      <workItem from="1755689959816" duration="1260000" />
     </task>
     <servers />
   </component>
